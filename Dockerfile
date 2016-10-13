@@ -18,7 +18,7 @@ WORKDIR /home/browser
 
 CMD /app/entry_point.sh /app/run.sh
 
-LABEL wr.browser="ch" \
+LABEL wr.name="Chrome" \
       wr.version="53" \
       wr.os="lin" \
       wr.release="2016-09-30" \
