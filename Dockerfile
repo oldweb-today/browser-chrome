@@ -20,7 +20,7 @@ CMD /app/entry_point.sh /app/run.sh
 
 LABEL wr.name="Chrome" \
       wr.version="53" \
-      wr.os="lin" \
+      wr.os="linux" \
       wr.release="2016-09-30" \
       wr.about="https://en.wikipedia.org/wiki/Google_Chrome" \
       wr.caps.flash="1" \
