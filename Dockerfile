@@ -13,6 +13,7 @@ COPY $CHROME_DEB /tmp/$CHROME_DEB
 COPY $CHROME_DEB /var/cache/apt/archives/
 
 RUN dpkg -i /tmp/$CHROME_DEB; apt-get update; apt-get install -fqqy && \
+    apt-get install wmctrl && \
     rm -rf /var/lib/opts/lists/*
 
 USER browser

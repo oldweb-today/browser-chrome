@@ -15,6 +15,29 @@ mkdir ~/.config/
 mkdir ~/.config/google-chrome
 touch ~/.config/google-chrome/First\ Run
 
-run_browser google-chrome --no-default-browser-check --disable-popup-blocking --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --safebrowsing-disable-auto-update "$URL"
+run_browser google-chrome --no-default-browser-check --disable-popup-blocking --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --safebrowsing-disable-auto-update "$URL" &
+
+
+pid=$!
+
+count=0
+wid=""
+
+while [ -z "$wid" ]; do
+    wid=$(wmctrl -l | grep " Google Chrome" | cut -f 1 -d ' ')
+    if [ -n "$wid" ]; then
+        echo "Chrome Found"
+        break
+    fi
+    sleep 0.5
+    count=$[$count + 1]
+    echo "Chrome Not Found"
+    if [ $count -eq 6 ]; then
+        echo "Restarting process"
+        kill $(ps -ef | grep "/chrome/chrome --no-def" | awk '{ print $2 }')
+        count=0
+    fi
+done
+
 
 
