@@ -16,6 +16,8 @@ RUN dpkg -i /tmp/$CHROME_DEB; apt-get update; apt-get install -fqqy && \
     apt-get install wmctrl && \
     rm -rf /var/lib/opts/lists/*
 
+ADD ffmpeg3.2.tar.gz /app/
+
 USER browser
 
 COPY run.sh /app/run.sh

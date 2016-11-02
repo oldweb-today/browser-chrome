@@ -17,6 +17,8 @@ touch ~/.config/google-chrome/First\ Run
 
 run_browser google-chrome --no-default-browser-check --disable-popup-blocking --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --safebrowsing-disable-auto-update "$URL" &
 
+#run_browser /app/ffmpeg -f pulse -i default -bufsize 32k -ac 1 -c:a libopus -min_frag_duration 500 -ab 12k -ar 12000 -listen 1 -f webm http://0.0.0.0:6082 &
+run_browser /app/ffmpeg -re -f pulse -i default -bufsize 32k -ac 1 -c:a libopus -ab 32k -listen 1 -f segment -min_frag_duration 500 -f webm http://0.0.0.0:6082 &
 
 pid=$!
 
