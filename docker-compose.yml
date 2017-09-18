@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+   chrome_53:
+      image: 'oldwebtoday/chrome:53'
+      build:
+        context: .
+        args:
+            CHROME_DEB: google-chrome-stable_53.0.2785.143-1_amd64.deb
+
+        labels:
+            "wr.version": "53"
+            "wr.release": "2016-09-24"
+            "wr.caps.flash": "1"
+ 
+   chrome_60:
+      image: 'oldwebtoday/chrome:60'
+      build:
+        context: .
+        args:
+            CHROME_DEB: google-chrome-stable_60.0.3112.113-1_amd64.deb
+
+        labels:
+            "wr.version": "60"
+            "wr.release": "2017-08-24"
