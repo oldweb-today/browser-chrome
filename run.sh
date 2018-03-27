@@ -14,7 +14,10 @@ mkdir ~/.config/
 mkdir ~/.config/google-chrome
 touch ~/.config/google-chrome/First\ Run
 
-run_browser google-chrome --no-default-browser-check --disable-popup-blocking --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --safebrowsing-disable-auto-update "$URL" &
+# tunnel to localhost
+run_browser socat tcp-listen:9222,fork tcp:localhost:9221 &
+
+run_browser google-chrome --no-default-browser-check --disable-popup-blocking --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --safebrowsing-disable-auto-update --remote-debugging-port=9221 "$URL" &
 
 pid=$!
 
