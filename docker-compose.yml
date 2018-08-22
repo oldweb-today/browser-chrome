@@ -23,3 +23,14 @@ services:
         labels:
             "wr.version": "60"
             "wr.release": "2017-08-24"
+
+   chrome_67:
+      image: 'oldwebtoday/chrome:67'
+      build:
+        context: .
+        args:
+            CHROME_DEB: google-chrome-stable_67.0.3396.99-1_amd64.deb
+
+        labels:
+            "wr.version": "67"
+            "wr.release": "2018-05-29"
