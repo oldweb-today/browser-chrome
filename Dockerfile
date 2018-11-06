@@ -1,5 +1,7 @@
 FROM oldwebtoday/base-browser
 
+USER root
+
 ARG CHROME_DEB
 
 COPY ./deb/$CHROME_DEB /tmp/$CHROME_DEB
@@ -7,18 +9,16 @@ COPY ./deb/$CHROME_DEB /tmp/$CHROME_DEB
 COPY ./deb/$CHROME_DEB /var/cache/apt/archives/
 
 RUN dpkg -i /tmp/$CHROME_DEB; apt-get update; apt-get install -fqqy && \
-    apt-get install wmctrl && \
+    apt-get install -fqqy socat && \
     rm -rf /var/lib/opts/lists/*
 
 USER browser
 
-COPY run.sh /app/run.sh
-
-RUN sudo chmod a+x /app/run.sh
-
 WORKDIR /home/browser
 
-CMD /app/entry_point.sh /app/run.sh
+COPY run.sh /app/run.sh
+
+CMD /app/run.sh
 
 LABEL wr.name="Chrome" \
       wr.os="linux" \

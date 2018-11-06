@@ -1,6 +1,6 @@
 #!/bin/bash
 
-run_browser jwm -display $DISPLAY &
+run_forever jwm -display $DISPLAY &
 
 if [[ -n "$PROXY_GET_CA" && -n "$PROXY_HOST" ]]; then
     curl -x "$PROXY_HOST:$PROXY_PORT"  "$PROXY_GET_CA" > /tmp/proxy-ca.pem
@@ -15,9 +15,9 @@ mkdir ~/.config/google-chrome
 touch ~/.config/google-chrome/First\ Run
 
 # tunnel to localhost
-run_browser socat tcp-listen:9222,fork tcp:localhost:9221 &
+run_forever socat tcp-listen:9222,fork tcp:localhost:9221 &
 
-run_browser google-chrome --no-default-browser-check \
+run_forever google-chrome --no-default-browser-check \
   --disable-component-update \
   --disable-popup-blocking \
   --disable-background-networking \
@@ -63,5 +63,5 @@ while [ -z "$wid" ]; do
     fi
 done
 
-
+wait $pid
 
