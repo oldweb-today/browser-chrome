@@ -17,7 +17,14 @@ touch ~/.config/google-chrome/First\ Run
 # tunnel to localhost
 run_forever socat tcp-listen:9222,fork tcp:localhost:9221 &
 
-run_forever google-chrome --no-default-browser-check \
+if xhost >& /dev/null; then
+  HEADLESS=""
+else
+  HEADLESS="--headless"
+fi
+
+run_forever google-chrome $HEADLESS \
+  --no-default-browser-check \
   --disable-component-update \
   --disable-popup-blocking \
   --disable-background-networking \
