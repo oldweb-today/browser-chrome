@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-run_forever jwm -display $DISPLAY &
+if xhost >& /dev/null; then
+  run_forever jwm -display "$DISPLAY" &
 
-if [[ -n "$PROXY_GET_CA" && -n "$PROXY_HOST" ]]; then
-    curl -x "$PROXY_HOST:$PROXY_PORT"  "$PROXY_GET_CA" > /tmp/proxy-ca.pem
+  HEADLESS=""
+else
+  HEADLESS="--headless"
+fi
 
-    mkdir -p $HOME/.pki/nssdb
-    certutil -d $HOME/.pki/nssdb -N
-    certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "Proxy" -i /tmp/proxy-ca.pem
+if [[ -n "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
+    mkdir -p "$HOME/.pki/nssdb"
+    certutil -d "$HOME/.pki/nssdb" -N
+    certutil -d "sql:$HOME/.pki/nssdb" -A -t "C,," -n "Proxy" -i "$PROXY_CA_FILE"
 fi
 
 mkdir ~/.config/
@@ -16,12 +20,6 @@ touch ~/.config/google-chrome/First\ Run
 
 # tunnel to localhost
 run_forever socat tcp-listen:9222,fork tcp:localhost:9221 &
-
-if xhost >& /dev/null; then
-  HEADLESS=""
-else
-  HEADLESS="--headless"
-fi
 
 extractChromeMajor() {
     : "${1#"${1%%[![:space:]]*}"}"  # strip leading whitespace
@@ -80,18 +78,18 @@ pid=$!
 count=0
 wid=""
 
-while [ -z "$wid" ]; do
+while [[ -z "$HEADLESS" && -z "$wid" ]]; do
     wid=$(wmctrl -l | grep " Google Chrome" | cut -f 1 -d ' ')
     if [ -n "$wid" ]; then
         echo "Chrome Found"
         break
     fi
     sleep 0.5
-    count=$[$count + 1]
+    count=$((count+1))
     echo "Chrome Not Found"
     if [ $count -eq 6 ]; then
         echo "Restarting process"
-        kill $(ps -ef | grep "/chrome/chrome --no-def" | awk '{ print $2 }')
+        kill "$(ps -ef | grep "/chrome/chrome --no-def" | awk '{ print $2 }')"
         count=0
     fi
 done
