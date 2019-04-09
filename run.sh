@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 run_forever jwm -display $DISPLAY &
 
@@ -23,7 +23,34 @@ else
   HEADLESS="--headless"
 fi
 
-run_forever google-chrome $HEADLESS \
+extractChromeMajor() {
+    : "${1#"${1%%[![:space:]]*}"}"  # strip leading whitespace
+    : "${_%"${_##*[![:space:]]}"}"  # strip trailing whitespace
+    : "${_/Google Chrome }"         # remove non version info
+    : "${_:: 1}"                    # get first major
+    printf '%s' "$_"
+}
+
+CARGS="--disable-features=site-per-process"
+CMAJOR=$(extractChromeMajor "$(google-chrome --version)")
+
+if [[ ${CMAJOR} -gt 6 ]]; then
+    CARGS="--disable-backgrounding-occluded-windows \
+  --disable-backing-store-limit \
+  --disable-breakpad \
+  --disable-features=site-per-process,TranslateUI,LazyFrameLoading,LazyImageLoading,BlinkGenPropertyTrees \
+  --disable-gpu-process-crash-limit \
+  --disable-ipc-flooding-protection \
+  --enable-features=NetworkService,NetworkServiceInProcess \
+  --force-color-profile=srgb \
+  --no-pings \
+  --no-user-gesture-required \
+  --no-first-run"
+fi
+
+
+run_forever google-chrome ${HEADLESS} ${CARGS} \
+  --allow-hidden-media-playback \
   --no-default-browser-check \
   --disable-component-update \
   --disable-popup-blocking \
@@ -46,7 +73,6 @@ run_forever google-chrome $HEADLESS \
   --password-store=basic \
   --use-mock-keychain \
   --autoplay-policy=no-user-gesture-required  \
-  --disable-features=site-per-process \
   --remote-debugging-port=9221 "$URL" &
 
 pid=$!
