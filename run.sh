@@ -46,10 +46,10 @@ if [[ ${CMAJOR} -gt 6 ]]; then
   --no-first-run"
 fi
 
-
-run_forever google-chrome ${HEADLESS} ${CARGS} \
+# using fixed flag first for easier grep matching
+run_forever google-chrome --no-default-browser-check \
+  ${HEADLESS} ${CARGS} \
   --allow-hidden-media-playback \
-  --no-default-browser-check \
   --disable-component-update \
   --disable-popup-blocking \
   --disable-background-networking \
@@ -85,11 +85,11 @@ while [[ -z "$HEADLESS" && -z "$wid" ]]; do
         break
     fi
     sleep 0.5
-    count=$((count+1))
+    ((count+=1))
     echo "Chrome Not Found"
     if [ $count -eq 6 ]; then
         echo "Restarting process"
-        kill "$(ps -ef | grep "/chrome/chrome --no-def" | awk '{ print $2 }')"
+        pkill -f "/chrome/chrome --no-def"
         count=0
     fi
 done
