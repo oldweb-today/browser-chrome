@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if xhost >& /dev/null; then
+if [[ -n "$DISPLAY" ]]; then
   run_forever jwm -display "$DISPLAY" &
 
   HEADLESS=""
@@ -8,7 +8,7 @@ else
   HEADLESS="--headless"
 fi
 
-if [[ -n "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
+if [[ -n "$PROXY_CA_FILE" && -f "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
     mkdir -p "$HOME/.pki/nssdb"
     certutil -d "$HOME/.pki/nssdb" -N
     certutil -d "sql:$HOME/.pki/nssdb" -A -t "C,," -n "Proxy" -i "$PROXY_CA_FILE"
