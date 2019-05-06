@@ -50,7 +50,6 @@ fi
 run_forever google-chrome --no-default-browser-check \
   ${HEADLESS} ${CARGS} \
   --allow-hidden-media-playback \
-  --disable-component-update \
   --disable-popup-blocking \
   --disable-background-networking \
   --disable-background-timer-throttling \
@@ -59,8 +58,6 @@ run_forever google-chrome --no-default-browser-check \
   --disable-extensions \
   --disable-hang-monitor \
   --disable-prompt-on-repost \
-  --disable-sync \
-  --disable-translate \
   --disable-domain-reliability \
   --disable-renderer-backgrounding \
   --disable-infobars \
@@ -68,8 +65,6 @@ run_forever google-chrome --no-default-browser-check \
   --metrics-recording-only \
   --no-first-run \
   --safebrowsing-disable-auto-update \
-  --password-store=basic \
-  --use-mock-keychain \
   --autoplay-policy=no-user-gesture-required  \
   --remote-debugging-port=9221 "$URL" &
 
