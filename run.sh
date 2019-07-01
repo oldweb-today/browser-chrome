@@ -55,7 +55,6 @@ run_forever google-chrome --no-default-browser-check \
   --disable-background-timer-throttling \
   --disable-client-side-phishing-detection \
   --disable-default-apps \
-  --disable-extensions \
   --disable-hang-monitor \
   --disable-prompt-on-repost \
   --disable-domain-reliability \
