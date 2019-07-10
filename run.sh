@@ -68,9 +68,9 @@ run_forever google-chrome --no-default-browser-check \
   --disable-domain-reliability \
   --disable-renderer-backgrounding \
   --disable-infobars \
-  --disable-translate \
   --metrics-recording-only \
   --no-first-run \
+  --translate-ranker-model-url=about:blank \
   --safebrowsing-disable-auto-update \
   --autoplay-policy=no-user-gesture-required  \
   --remote-debugging-port=9221 "$URL" &
