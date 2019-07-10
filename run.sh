@@ -48,9 +48,15 @@ if [[ ${CMAJOR} -gt 6 ]]; then
   --no-first-run"
 fi
 
+FLASH=/app/libpepflashplayer.so
+
+
 # using fixed flag first for easier grep matching
 run_forever google-chrome --no-default-browser-check \
   ${HEADLESS} ${CARGS} \
+  --ppapi-flash-path=${FLASH} \
+  --allow-outdated-plugins \
+  --always-authorize-plugins \
   --allow-hidden-media-playback \
   --disable-popup-blocking \
   --disable-background-networking \

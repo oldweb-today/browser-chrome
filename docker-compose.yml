@@ -23,6 +23,7 @@ services:
       labels:
         "wr.version": "60"
         "wr.release": "2017-08-24"
+        "wr.caps.flash": "1"
 
   chrome_67:
     image: 'oldwebtoday/chrome:67'
@@ -34,6 +35,7 @@ services:
       labels:
         "wr.version": "67"
         "wr.release": "2018-05-29"
+        "wr.caps.flash": "1"
         "wr.caps.autopilot": "1"
 
   chrome_73:
@@ -46,5 +48,6 @@ services:
       labels:
         "wr.version": "73"
         "wr.release": "2019-03-12"
+        "wr.caps.flash": "1"
         "wr.caps.autopilot": "1"
 
