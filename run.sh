@@ -9,9 +9,11 @@ else
 fi
 
 if [[ -n "$PROXY_CA_FILE" && -f "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
+    rm -rf "$HOME/.pki/nssdb"
     mkdir -p "$HOME/.pki/nssdb"
     certutil -d "$HOME/.pki/nssdb" -N
     certutil -d "sql:$HOME/.pki/nssdb" -A -t "C,," -n "Proxy" -i "$PROXY_CA_FILE"
+    rm "$PROXY_CA_FILE"
 fi
 
 mkdir ~/.config/

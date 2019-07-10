@@ -1,47 +1,50 @@
 version: '3.3'
 
 services:
-   chrome_53:
-      image: 'oldwebtoday/chrome:53'
-      build:
-        context: .
-        args:
-            CHROME_DEB: google-chrome-stable_53.0.2785.143-1_amd64.deb
+  chrome_53:
+    image: 'oldwebtoday/chrome:53'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_53.0.2785.143-1_amd64.deb
 
-        labels:
-            "wr.version": "53"
-            "wr.release": "2016-09-24"
-            "wr.caps.flash": "1"
- 
-   chrome_60:
-      image: 'oldwebtoday/chrome:60'
-      build:
-        context: .
-        args:
-            CHROME_DEB: google-chrome-stable_60.0.3112.113-1_amd64.deb
+      labels:
+        "wr.version": "53"
+        "wr.release": "2016-09-24"
+        "wr.caps.flash": "1"
 
-        labels:
-            "wr.version": "60"
-            "wr.release": "2017-08-24"
+  chrome_60:
+    image: 'oldwebtoday/chrome:60'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_60.0.3112.113-1_amd64.deb
 
-   chrome_67:
-      image: 'oldwebtoday/chrome:67'
-      build:
-        context: .
-        args:
-            CHROME_DEB: google-chrome-stable_67.0.3396.99-1_amd64.deb
+      labels:
+        "wr.version": "60"
+        "wr.release": "2017-08-24"
 
-        labels:
-            "wr.version": "67"
-            "wr.release": "2018-05-29"
+  chrome_67:
+    image: 'oldwebtoday/chrome:67'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_67.0.3396.99-1_amd64.deb
 
-   chrome_73:
-     image: 'oldwebtoday/chrome:73'
-     build:
-       context: .
-       args:
-         CHROME_DEB: google-chrome-stable_73.0.3683.75-1_amd64.deb
+      labels:
+        "wr.version": "67"
+        "wr.release": "2018-05-29"
+        "wr.caps.autopilot": "1"
 
-       labels:
-         "wr.version": "73"
-         "wr.release": "2019-03-12"
+  chrome_73:
+    image: 'oldwebtoday/chrome:73'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_73.0.3683.75-1_amd64.deb
+
+      labels:
+        "wr.version": "73"
+        "wr.release": "2019-03-12"
+        "wr.caps.autopilot": "1"
+
