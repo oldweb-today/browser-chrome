@@ -1,0 +1,7 @@
+{
+  "DefaultPluginsSetting": 1,
+  "PluginsAllowedForUrls": ["https://*", "http://*"],
+  "RunAllFlashInAllowMode": true,
+  "TranslateEnabled": false,
+  "NewTabPageLocation": "about:blank",
+}

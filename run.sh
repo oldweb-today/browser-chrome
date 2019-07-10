@@ -9,9 +9,11 @@ else
 fi
 
 if [[ -n "$PROXY_CA_FILE" && -f "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
+    rm -rf "$HOME/.pki/nssdb"
     mkdir -p "$HOME/.pki/nssdb"
     certutil -d "$HOME/.pki/nssdb" -N
     certutil -d "sql:$HOME/.pki/nssdb" -A -t "C,," -n "Proxy" -i "$PROXY_CA_FILE"
+    rm "$PROXY_CA_FILE"
 fi
 
 mkdir ~/.config/
@@ -46,9 +48,15 @@ if [[ ${CMAJOR} -gt 6 ]]; then
   --no-first-run"
 fi
 
+FLASH=/app/libpepflashplayer.so
+
+
 # using fixed flag first for easier grep matching
 run_forever google-chrome --no-default-browser-check \
   ${HEADLESS} ${CARGS} \
+  --ppapi-flash-path=${FLASH} \
+  --allow-outdated-plugins \
+  --always-authorize-plugins \
   --allow-hidden-media-playback \
   --disable-popup-blocking \
   --disable-background-networking \
@@ -60,9 +68,9 @@ run_forever google-chrome --no-default-browser-check \
   --disable-domain-reliability \
   --disable-renderer-backgrounding \
   --disable-infobars \
-  --disable-translate \
   --metrics-recording-only \
   --no-first-run \
+  --translate-ranker-model-url=about:blank \
   --safebrowsing-disable-auto-update \
   --autoplay-policy=no-user-gesture-required  \
   --remote-debugging-port=9221 "$URL" &

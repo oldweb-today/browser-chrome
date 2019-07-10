@@ -12,6 +12,10 @@ RUN dpkg -i /tmp/$CHROME_DEB; apt-get update; apt-get install -fqqy && \
     rm -rf /var/lib/opts/lists/*
     #apt-get install -fqqy socat && \
 
+COPY policy.json /etc/opt/chrome/policies/managed/policy.json
+
+COPY ./flash/libpepflashplayer.so /app/libpepflashplayer.so
+
 USER browser
 
 WORKDIR /home/browser
