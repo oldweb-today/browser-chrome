@@ -1,4 +1,5 @@
 {
   "DefaultPluginsSetting": 1,
-  "PluginsAllowedForUrls": ["https://*", "http://*"]
+  "PluginsAllowedForUrls": ["https://*", "http://*"],
+  "RunAllFlashInAllowMode": true
 }
