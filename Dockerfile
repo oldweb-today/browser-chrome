@@ -1,4 +1,6 @@
-FROM oldwebtoday/base-browser
+ARG BASE=oldwebtoday/base-browser:18.04
+
+FROM $BASE
 
 USER root
 

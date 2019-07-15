@@ -6,6 +6,7 @@ services:
     build:
       context: .
       args:
+        BASE: 'oldwebtoday/base-browser:16.04'
         CHROME_DEB: google-chrome-stable_53.0.2785.143-1_amd64.deb
 
       labels:
