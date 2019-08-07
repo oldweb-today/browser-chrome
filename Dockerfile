@@ -8,8 +8,6 @@ ARG CHROME_DEB
 
 COPY ./deb/$CHROME_DEB /tmp/$CHROME_DEB
 
-COPY ./deb/$CHROME_DEB /var/cache/apt/archives/
-
 RUN dpkg -i /tmp/$CHROME_DEB; apt-get update; apt-get install -fqqy && \
     rm -rf /var/lib/opts/lists/*
     #apt-get install -fqqy socat && \
