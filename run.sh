@@ -50,6 +50,11 @@ fi
 
 FLASH=/app/libpepflashplayer.so
 
+if [[ ${CMAJOR} -ge 8 ]]; then
+  CARGS="$CARGS --no-xshm"
+
+  export QT_X11_NO_MITSHM=1
+fi
 
 # using fixed flag first for easier grep matching
 run_forever google-chrome --no-default-browser-check \

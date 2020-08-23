@@ -65,3 +65,57 @@ services:
         "wr.caps.flash": "1"
         "wr.caps.autopilot": "1"
 
+  chrome_84:
+    image: 'oldwebtoday/chrome:84'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_84.0.4147.89-1_amd64.deb
+
+      labels:
+        "wr.version": "84"
+        "wr.release": "2020-07-14"
+        "wr.caps.flash": "1"
+        "wr.caps.autopilot": "1"
+
+  chrome_88:
+    image: 'oldwebtoday/chrome:88'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_88.0.4324.96-1_amd64.deb
+
+      labels:
+        "wr.version": "88"
+        "wr.release": "2021-01-19"
+        "wr.caps.autopilot": "1"
+
+  chrome_90:
+    image: 'oldwebtoday/chrome:90'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_90.0.4430.93-1_amd64.deb
+
+      labels:
+        "wr.version": "90"
+        "wr.release": "2021-04-23"
+        "wr.caps.autopilot": "1"
+
+  chrome_91:
+    image: 'oldwebtoday/chrome:91'
+    build:
+      context: .
+      args:
+        CHROME_DEB: google-chrome-stable_91.0.4472.101-1_amd64.deb
+
+      labels:
+        "wr.version": "90"
+        "wr.release": "2021-06-08"
+        "wr.caps.autopilot": "1"
+
+
+
+
+
+
