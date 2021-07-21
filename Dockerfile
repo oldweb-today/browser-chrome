@@ -16,6 +16,12 @@ COPY policy.json /etc/opt/chrome/policies/managed/policy.json
 
 COPY ./flash/libpepflashplayer.so /app/libpepflashplayer.so
 
+ARG BROWSER_EXE=google-chrome
+
+ENV BROWSER_EXE=${BROWSER_EXE}
+
+RUN ln -s /usr/bin/$BROWSER_EXE /usr/bin/run-browser
+
 USER browser
 
 WORKDIR /home/browser

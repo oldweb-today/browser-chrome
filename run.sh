@@ -8,6 +8,11 @@ else
   HEADLESS="--headless"
 fi
 
+
+if [[ -z "$BROWSER_EXE" ]]; then
+  BROWSER_EXE=google-chrome
+fi
+
 if [[ -n "$PROXY_CA_FILE" && -f "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
     rm -rf "$HOME/.pki/nssdb"
     mkdir -p "$HOME/.pki/nssdb"
@@ -17,8 +22,8 @@ if [[ -n "$PROXY_CA_FILE" && -f "$PROXY_CA_FILE" && -n "$PROXY_HOST" ]]; then
 fi
 
 mkdir ~/.config/
-mkdir ~/.config/google-chrome
-touch ~/.config/google-chrome/First\ Run
+mkdir ~/.config/$BROWSER_EXE
+touch ~/.config/$BROWSER_EXE/First\ Run
 
 # tunnel to localhost
 run_forever socat tcp-listen:9222,fork tcp:localhost:9221 &
@@ -32,7 +37,7 @@ extractChromeMajor() {
 }
 
 CARGS="--disable-features=site-per-process"
-CMAJOR=$(extractChromeMajor "$(google-chrome --version)")
+CMAJOR=$(extractChromeMajor "$($BROWSER_EXE --version)")
 
 if [[ ${CMAJOR} -gt 6 ]]; then
     CARGS="--disable-backgrounding-occluded-windows \
@@ -57,7 +62,7 @@ if [[ ${CMAJOR} -ge 8 ]]; then
 fi
 
 # using fixed flag first for easier grep matching
-run_forever google-chrome --no-default-browser-check \
+run_forever $BROWSER_EXE --no-default-browser-check \
   ${HEADLESS} ${CARGS} \
   --ppapi-flash-path=${FLASH} \
   --allow-outdated-plugins \

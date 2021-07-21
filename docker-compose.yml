@@ -110,12 +110,24 @@ services:
         CHROME_DEB: google-chrome-stable_91.0.4472.101-1_amd64.deb
 
       labels:
-        "wr.version": "90"
+        "wr.version": "91"
         "wr.release": "2021-06-08"
         "wr.caps.autopilot": "1"
 
+  chromium_91_arm:
+    image: 'oldwebtoday/chromium:91-arm'
+    platform: linux/arm64
+    build:
+      context: .
+      args:
+        CHROME_DEB: chromium-browser_91.0.4472.101-0ubuntu0.18.04.1_arm64.deb
+        BROWSER_EXE: /usr/bin/chromium-browser
 
-
+      labels:
+        "wr.version": "91"
+        "wr.release": "2021-06-14"
+        "wr.caps.flash": "0"
+        "wr.caps.autopilot": "1"
 
 
 
